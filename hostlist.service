@@ -1,0 +1,13 @@
+[Unit]
+Description=Systemd Service Config for hostlist
+AssertPathExists=/srv/hostlist
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python2 /srv/hostlist/hostlist.py
+Restart=always
+RestartSec=10
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

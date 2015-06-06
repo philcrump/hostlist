@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Dnsmasq Hostlist</title>
+<style>
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+td {
+    padding-bottom: 0.5em;
+}
+.lease-hostname {
+    font-weight: bold;
+    padding-right: 2em;
+}
+.hostname-unknown {
+    font-style: italic;
+}
+</style>
+</head>
+<body>
+    <h1>Host Leases</h1>
+    <table>
+    {% for host in leases %}
+        {# Check for valid lease #}
+        {% if not (host[3]=='*' and host[4]=='*') %}
+            <tr class="lease-row">
+                {% if host[3]=='*' %}
+                    <td class="lease-hostname hostname-unknown">[unknown]</td>
+                {% else %}
+                    <td class="lease-hostname">{{ host[3] }}</td>
+                {% endif %}
+                <td>{{ host[2] }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</body>
+</html>
